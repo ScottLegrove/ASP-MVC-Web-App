@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e81f60e3dd7e4c758b7f7a34cf75ea9e" Name="Diagram1">
+        <EntityTypeShape EntityType="SPMModel.Class_Assignements" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.Class" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.Project_Assignments" Width="1.5" PointX="5.25" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.Project" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.School" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.SPM_Users" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.Test_Assignments" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMModel.Test" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="SPMModel.fk_class_class_assignment" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_class_school" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_class_student" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_class_project" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_class_test_assignment" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_class_tests" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_project_project_assignment" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_student_project" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_programs_schools" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_spm_users_schools" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_student_tests" ManuallyRouted="false" />
+        <AssociationConnector Association="SPMModel.fk_test_test_assignment" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SPMModel.Program" Width="1.5" PointX="3" PointY="7.75" />
+        <AssociationConnector Association="SPMModel.fk_class_program" />
+        <AssociationConnector Association="SPMModel.fk_programs_schools_programs" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

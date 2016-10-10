@@ -1,0 +1,32 @@
+﻿@using SPM.Entities;
+@using System.Collections.Generic;
+@{
+    ViewBag.Title = "AdminDashboard";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>All currently registered schools</h2>
+
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>City</th>
+        <th>Country</th>
+    </tr>
+   
+        @{
+            if (ViewData["schoolList"] != null)
+            {
+                List<School> schools = ViewData["schoolList"] as List<School>;
+                foreach (var school in schools)
+                {
+                    <tr>
+                        <td>@school.school_name</td>
+                        <td>@school.city</td>
+                        <td>@school.country</td>
+                    </tr>
+                }
+
+            }
+        }                    
+</table>

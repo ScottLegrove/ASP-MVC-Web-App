@@ -1,0 +1,1574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SPMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Class_Assignements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_program" Type="int" Nullable="false" />
+          <Property Name="fk_class" Type="int" Nullable="false" />
+          <Property Name="fk_school" Type="int" Nullable="false" />
+          <Property Name="fk_student" Type="int" Nullable="false" />
+          <Property Name="fk_teacher" Type="int" />
+        </EntityType>
+        <EntityType Name="Classes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="class_name" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="class_code" Type="varchar" MaxLength="50" />
+          <Property Name="teacher_name" Type="varchar" MaxLength="75" />
+          <Property Name="credit_hours" Type="int" />
+          <Property Name="fk_School" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Programs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_school" Type="int" Nullable="false" />
+          <Property Name="programs_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="semesters" Type="int" />
+          <Property Name="course_code" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Project_Assignments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_class" Type="int" Nullable="false" />
+          <Property Name="fk_student" Type="int" Nullable="false" />
+          <Property Name="fk_project" Type="int" Nullable="false" />
+          <Property Name="fk_teacher" Type="int" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="projects_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="grade" Type="float" />
+          <Property Name="grade_out_of" Type="int" Nullable="false" />
+          <Property Name="grade_weight" Type="int" />
+          <Property Name="due_date" Type="datetime" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="last_modified" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="fk_class_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schools">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="school_name" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="country" Type="varchar" MaxLength="75" />
+          <Property Name="city" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="SPM_Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_schools" Type="int" Nullable="false" />
+          <Property Name="fk_programs" Type="int" />
+          <Property Name="users_name" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="pass" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="is_student" Type="bit" Nullable="false" />
+          <Property Name="is_teacher" Type="bit" Nullable="false" />
+          <Property Name="is_admin" Type="bit" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="last_login_at" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="email_confirmed" Type="bit" />
+          <Property Name="gpa" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Test_Assignments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fk_class" Type="int" Nullable="false" />
+          <Property Name="fk_test" Type="int" Nullable="false" />
+          <Property Name="fk_student" Type="int" Nullable="false" />
+          <Property Name="fk_user_teacher" Type="int" />
+        </EntityType>
+        <EntityType Name="Tests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tests_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="grade" Type="float" />
+          <Property Name="grade_out_of" Type="int" Nullable="false" />
+          <Property Name="grade_weight" Type="int" Nullable="false" />
+          <Property Name="due_date" Type="datetime" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="last_modified" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="fk_class_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_class_class_assignment">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Class_Assignements" Type="Self.Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_program">
+          <End Role="Programs" Type="Self.Programs" Multiplicity="1" />
+          <End Role="Class_Assignements" Type="Self.Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_project">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Project_Assignments" Type="Self.Project_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_Assignments">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_school">
+          <End Role="Schools" Type="Self.Schools" Multiplicity="1" />
+          <End Role="Class_Assignements" Type="Self.Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_school" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_student">
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="1" />
+          <End Role="Class_Assignements" Type="Self.Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPM_Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_test_assignment">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_tests">
+          <End Role="Classes" Type="Self.Classes" Multiplicity="1" />
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_programs_schools">
+          <End Role="Schools" Type="Self.Schools" Multiplicity="1" />
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SPM_Users">
+              <PropertyRef Name="fk_schools" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_programs_schools_programs">
+          <End Role="Schools" Type="Self.Schools" Multiplicity="1" />
+          <End Role="Programs" Type="Self.Programs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Programs">
+              <PropertyRef Name="fk_school" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_project_assignment">
+          <End Role="Projects" Type="Self.Projects" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Assignments" Type="Self.Project_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_Assignments">
+              <PropertyRef Name="fk_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_spm_users_schools">
+          <End Role="Schools" Type="Self.Schools" Multiplicity="1" />
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SPM_Users">
+              <PropertyRef Name="fk_schools" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_student_project">
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Project_Assignments" Type="Self.Project_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPM_Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_Assignments">
+              <PropertyRef Name="fk_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_student_tests">
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPM_Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_test_test_assignment">
+          <End Role="Tests" Type="Self.Tests" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteClassAssignments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteClasses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeletePrograms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProjectsAssignment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSchools" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteTestAssignment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteTests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="InsertClassAssignments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fk_class" Type="int" Mode="In" />
+          <Parameter Name="fk_program" Type="int" Mode="In" />
+          <Parameter Name="fk_school" Type="int" Mode="In" />
+          <Parameter Name="fk_student" Type="int" Mode="In" />
+          <Parameter Name="fk_teacher" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertClasses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="class_name" Type="varchar" Mode="In" />
+          <Parameter Name="class_code" Type="varchar" Mode="In" />
+          <Parameter Name="teacher_name" Type="varchar" Mode="In" />
+          <Parameter Name="credit_hours" Type="int" Mode="In" />
+          <Parameter Name="fk_school_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertPrograms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fk_school" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="semesters" Type="int" Mode="In" />
+          <Parameter Name="course_code" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertProjectAssignments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fk_project" Type="int" Mode="In" />
+          <Parameter Name="fk_class" Type="int" Mode="In" />
+          <Parameter Name="fk_user_student" Type="int" Mode="In" />
+          <Parameter Name="fk_teacher" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertProjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="grade" Type="float" Mode="In" />
+          <Parameter Name="grade_out_of" Type="int" Mode="In" />
+          <Parameter Name="grade_weight" Type="int" Mode="In" />
+          <Parameter Name="due_date" Type="datetime" Mode="In" />
+          <Parameter Name="fk_class_id" Type="int" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+          <Parameter Name="last_modified" Type="timestamp" Mode="In" />
+        </Function>
+        <Function Name="InsertSchools" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="school_name" Type="varchar" Mode="In" />
+          <Parameter Name="country" Type="varchar" Mode="In" />
+          <Parameter Name="city" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertTestAssignments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fk_test" Type="int" Mode="In" />
+          <Parameter Name="fk_class" Type="int" Mode="In" />
+          <Parameter Name="fk_user_student" Type="int" Mode="In" />
+          <Parameter Name="fk_user_teacher" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertTests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="grade" Type="float" Mode="In" />
+          <Parameter Name="grade_out_of" Type="int" Mode="In" />
+          <Parameter Name="grade_weight" Type="int" Mode="In" />
+          <Parameter Name="due_date" Type="datetime" Mode="In" />
+          <Parameter Name="fk_class_id" Type="int" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="InsertUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="fk_school" Type="int" Mode="In" />
+          <Parameter Name="fk_program" Type="int" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="is_student" Type="bit" Mode="In" />
+          <Parameter Name="is_teacher" Type="bit" Mode="In" />
+          <Parameter Name="is_admin" Type="bit" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+          <Parameter Name="last_login_at" Type="timestamp" Mode="In" />
+          <Parameter Name="email_confirmed" Type="bit" Mode="In" />
+          <Parameter Name="gpa" Type="float" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UpdateClassAssignments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="fk_class" Type="int" Mode="In" />
+          <Parameter Name="fk_program" Type="int" Mode="In" />
+          <Parameter Name="fk_school" Type="int" Mode="In" />
+          <Parameter Name="fk_student" Type="int" Mode="In" />
+          <Parameter Name="fk_teacher" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateClasses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="class_name" Type="varchar" Mode="In" />
+          <Parameter Name="class_code" Type="varchar" Mode="In" />
+          <Parameter Name="teacher_name" Type="varchar" Mode="In" />
+          <Parameter Name="credit_hours" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdatePrograms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="fk_school" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="semesters" Type="tinyint" Mode="In" />
+          <Parameter Name="course_code" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateProjectAssignments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="fk_project" Type="int" Mode="In" />
+          <Parameter Name="fk_class" Type="int" Mode="In" />
+          <Parameter Name="fk_user_student" Type="int" Mode="In" />
+          <Parameter Name="fk_teacher" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateProjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="grade" Type="float" Mode="In" />
+          <Parameter Name="grade_out_of" Type="int" Mode="In" />
+          <Parameter Name="grade_weight" Type="int" Mode="In" />
+          <Parameter Name="due_date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateSchools" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="school_name" Type="varchar" Mode="In" />
+          <Parameter Name="country" Type="varchar" Mode="In" />
+          <Parameter Name="city" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateTestAssignment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="fk_test" Type="int" Mode="In" />
+          <Parameter Name="fk_class" Type="int" Mode="In" />
+          <Parameter Name="fk_user_student" Type="int" Mode="In" />
+          <Parameter Name="fk_user_teacher" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateTests" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="grade" Type="float" Mode="In" />
+          <Parameter Name="grade_out_of" Type="int" Mode="In" />
+          <Parameter Name="grade_weight" Type="int" Mode="In" />
+          <Parameter Name="due_date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="UpdateUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="is_student" Type="bit" Mode="In" />
+          <Parameter Name="is_teacher" Type="bit" Mode="In" />
+          <Parameter Name="is_admin" Type="bit" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+          <Parameter Name="last_login_at" Type="timestamp" Mode="In" />
+          <Parameter Name="email_confirmed" Type="bit" Mode="In" />
+          <Parameter Name="gpa" Type="float" Mode="In" />
+        </Function>
+        <EntityContainer Name="SPMModelStoreContainer">
+          <EntitySet Name="Class_Assignements" EntityType="Self.Class_Assignements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Programs" EntityType="Self.Programs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project_Assignments" EntityType="Self.Project_Assignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schools" EntityType="Self.Schools" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SPM_Users" EntityType="Self.SPM_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test_Assignments" EntityType="Self.Test_Assignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tests" EntityType="Self.Tests" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_class_class_assignment" Association="Self.fk_class_class_assignment">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_program" Association="Self.fk_class_program">
+            <End Role="Programs" EntitySet="Programs" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_project" Association="Self.fk_class_project">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Project_Assignments" EntitySet="Project_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_school" Association="Self.fk_class_school">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_student" Association="Self.fk_class_student">
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_test_assignment" Association="Self.fk_class_test_assignment">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_tests" Association="Self.fk_class_tests">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_programs_schools" Association="Self.fk_programs_schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_programs_schools_programs" Association="Self.fk_programs_schools_programs">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="Programs" EntitySet="Programs" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_project_assignment" Association="Self.fk_project_project_assignment">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Assignments" EntitySet="Project_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_spm_users_schools" Association="Self.fk_spm_users_schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_student_project" Association="Self.fk_student_project">
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+            <End Role="Project_Assignments" EntitySet="Project_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_student_tests" Association="Self.fk_student_tests">
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_test_test_assignment" Association="Self.fk_test_test_assignment">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SPMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Class_Assignements">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_program" Type="Int32" Nullable="false" />
+          <Property Name="fk_class" Type="Int32" Nullable="false" />
+          <Property Name="fk_school" Type="Int32" Nullable="false" />
+          <Property Name="fk_student" Type="Int32" Nullable="false" />
+          <Property Name="fk_teacher" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="Self.fk_class_class_assignment" FromRole="Class_Assignements" ToRole="Classes" />
+          <NavigationProperty Name="School" Relationship="Self.fk_class_school" FromRole="Class_Assignements" ToRole="Schools" />
+          <NavigationProperty Name="SPM_Users" Relationship="Self.fk_class_student" FromRole="Class_Assignements" ToRole="SPM_Users" />
+          <NavigationProperty Name="Program" Relationship="SPMModel.fk_class_program" FromRole="Class_Assignements" ToRole="Program" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="class_name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="class_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="teacher_name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="credit_hours" Type="Int32" />
+          <NavigationProperty Name="Class_Assignements" Relationship="Self.fk_class_class_assignment" FromRole="Classes" ToRole="Class_Assignements" />
+          <NavigationProperty Name="Project_Assignments" Relationship="Self.fk_class_project" FromRole="Classes" ToRole="Project_Assignments" />
+          <NavigationProperty Name="Test_Assignments" Relationship="Self.fk_class_test_assignment" FromRole="Classes" ToRole="Test_Assignments" />
+          <NavigationProperty Name="Test_Assignments1" Relationship="Self.fk_class_tests" FromRole="Classes" ToRole="Test_Assignments" />
+          <Property Name="fk_School" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Project_Assignments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_class" Type="Int32" Nullable="false" />
+          <Property Name="fk_student" Type="Int32" Nullable="false" />
+          <Property Name="fk_project" Type="Int32" Nullable="false" />
+          <Property Name="fk_teacher" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="Self.fk_class_project" FromRole="Project_Assignments" ToRole="Classes" />
+          <NavigationProperty Name="Project" Relationship="Self.fk_project_project_assignment" FromRole="Project_Assignments" ToRole="Projects" />
+          <NavigationProperty Name="SPM_Users" Relationship="Self.fk_student_project" FromRole="Project_Assignments" ToRole="SPM_Users" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="projects_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="grade" Type="Double" />
+          <Property Name="grade_out_of" Type="Int32" Nullable="false" />
+          <Property Name="grade_weight" Type="Int32" />
+          <Property Name="due_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="last_modified" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Project_Assignments" Relationship="Self.fk_project_project_assignment" FromRole="Projects" ToRole="Project_Assignments" />
+          <Property Name="fk_class_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="school_name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Class_Assignements" Relationship="Self.fk_class_school" FromRole="Schools" ToRole="Class_Assignements" />
+          <NavigationProperty Name="SPM_Users" Relationship="Self.fk_programs_schools" FromRole="Schools" ToRole="SPM_Users" />
+          <NavigationProperty Name="SPM_Users1" Relationship="Self.fk_spm_users_schools" FromRole="Schools" ToRole="SPM_Users" />
+          <NavigationProperty Name="Programs" Relationship="SPMModel.fk_programs_schools_programs" FromRole="School" ToRole="Program" />
+        </EntityType>
+        <EntityType Name="SPM_Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_schools" Type="Int32" Nullable="false" />
+          <Property Name="fk_programs" Type="Int32" />
+          <Property Name="users_name" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="is_student" Type="Boolean" Nullable="false" />
+          <Property Name="is_teacher" Type="Boolean" Nullable="false" />
+          <Property Name="is_admin" Type="Boolean" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="last_login_at" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="email_confirmed" Type="Boolean" />
+          <Property Name="gpa" Type="Double" />
+          <NavigationProperty Name="Class_Assignements" Relationship="Self.fk_class_student" FromRole="SPM_Users" ToRole="Class_Assignements" />
+          <NavigationProperty Name="Project_Assignments" Relationship="Self.fk_student_project" FromRole="SPM_Users" ToRole="Project_Assignments" />
+          <NavigationProperty Name="School" Relationship="Self.fk_programs_schools" FromRole="SPM_Users" ToRole="Schools" />
+          <NavigationProperty Name="School1" Relationship="Self.fk_spm_users_schools" FromRole="SPM_Users" ToRole="Schools" />
+          <NavigationProperty Name="Test_Assignments" Relationship="Self.fk_student_tests" FromRole="SPM_Users" ToRole="Test_Assignments" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Test_Assignments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_class" Type="Int32" Nullable="false" />
+          <Property Name="fk_test" Type="Int32" Nullable="false" />
+          <Property Name="fk_student" Type="Int32" Nullable="false" />
+          <Property Name="fk_user_teacher" Type="Int32" />
+          <NavigationProperty Name="Class" Relationship="Self.fk_class_test_assignment" FromRole="Test_Assignments" ToRole="Classes" />
+          <NavigationProperty Name="Class1" Relationship="Self.fk_class_tests" FromRole="Test_Assignments" ToRole="Classes" />
+          <NavigationProperty Name="SPM_Users" Relationship="Self.fk_student_tests" FromRole="Test_Assignments" ToRole="SPM_Users" />
+          <NavigationProperty Name="Test" Relationship="Self.fk_test_test_assignment" FromRole="Test_Assignments" ToRole="Tests" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tests_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="grade" Type="Double" />
+          <Property Name="grade_out_of" Type="Int32" Nullable="false" />
+          <Property Name="grade_weight" Type="Int32" Nullable="false" />
+          <Property Name="due_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="last_modified" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Test_Assignments" Relationship="Self.fk_test_test_assignment" FromRole="Tests" ToRole="Test_Assignments" />
+          <Property Name="fk_class_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_class_class_assignment">
+          <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class_Assignements" Type="Self.Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_school">
+          <End Role="Schools" Type="Self.School" Multiplicity="1" />
+          <End Role="Class_Assignements" Type="Self.Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_school" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_student">
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="1" />
+          <End Role="Class_Assignements" Type="Self.Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPM_Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_project">
+          <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+          <End Role="Project_Assignments" Type="Self.Project_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_Assignments">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_test_assignment">
+          <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_class_tests">
+          <End Role="Classes" Type="Self.Class" Multiplicity="1" />
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_project_project_assignment">
+          <End Role="Projects" Type="Self.Project" Multiplicity="1" />
+          <End Role="Project_Assignments" Type="Self.Project_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projects">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_Assignments">
+              <PropertyRef Name="fk_project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_student_project">
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="1" />
+          <End Role="Project_Assignments" Type="Self.Project_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPM_Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Project_Assignments">
+              <PropertyRef Name="fk_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_programs_schools">
+          <End Role="Schools" Type="Self.School" Multiplicity="1" />
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SPM_Users">
+              <PropertyRef Name="fk_schools" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_spm_users_schools">
+          <End Role="Schools" Type="Self.School" Multiplicity="1" />
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schools">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SPM_Users">
+              <PropertyRef Name="fk_schools" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_student_tests">
+          <End Role="SPM_Users" Type="Self.SPM_Users" Multiplicity="1" />
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SPM_Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_test_test_assignment">
+          <End Role="Tests" Type="Self.Test" Multiplicity="1" />
+          <End Role="Test_Assignments" Type="Self.Test_Assignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tests">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Test_Assignments">
+              <PropertyRef Name="fk_test" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Class_Assignements" EntityType="Self.Class_Assignements" />
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="Project_Assignments" EntityType="Self.Project_Assignments" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="Schools" EntityType="Self.School" />
+          <EntitySet Name="SPM_Users" EntityType="Self.SPM_Users" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Test_Assignments" EntityType="Self.Test_Assignments" />
+          <EntitySet Name="Tests" EntityType="Self.Test" />
+          <AssociationSet Name="fk_class_class_assignment" Association="Self.fk_class_class_assignment">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_school" Association="Self.fk_class_school">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_student" Association="Self.fk_class_student">
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_project" Association="Self.fk_class_project">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Project_Assignments" EntitySet="Project_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_test_assignment" Association="Self.fk_class_test_assignment">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_class_tests" Association="Self.fk_class_tests">
+            <End Role="Classes" EntitySet="Classes" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_project_project_assignment" Association="Self.fk_project_project_assignment">
+            <End Role="Projects" EntitySet="Projects" />
+            <End Role="Project_Assignments" EntitySet="Project_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_student_project" Association="Self.fk_student_project">
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+            <End Role="Project_Assignments" EntitySet="Project_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_programs_schools" Association="Self.fk_programs_schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_spm_users_schools" Association="Self.fk_spm_users_schools">
+            <End Role="Schools" EntitySet="Schools" />
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+          </AssociationSet>
+          <AssociationSet Name="fk_student_tests" Association="Self.fk_student_tests">
+            <End Role="SPM_Users" EntitySet="SPM_Users" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_test_test_assignment" Association="Self.fk_test_test_assignment">
+            <End Role="Tests" EntitySet="Tests" />
+            <End Role="Test_Assignments" EntitySet="Test_Assignments" />
+          </AssociationSet>
+          <FunctionImport Name="DeleteClassAssignments">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteClasses">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeletePrograms">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteProjects">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteProjectsAssignment">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSchools">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTestAssignment">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteTests">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteUsers">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertClassAssignments">
+            <Parameter Name="fk_class" Mode="In" Type="Int32" />
+            <Parameter Name="fk_program" Mode="In" Type="Int32" />
+            <Parameter Name="fk_school" Mode="In" Type="Int32" />
+            <Parameter Name="fk_student" Mode="In" Type="Int32" />
+            <Parameter Name="fk_teacher" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertClasses">
+            <Parameter Name="class_name" Mode="In" Type="String" />
+            <Parameter Name="class_code" Mode="In" Type="String" />
+            <Parameter Name="teacher_name" Mode="In" Type="String" />
+            <Parameter Name="credit_hours" Mode="In" Type="Int32" />
+            <Parameter Name="fk_school_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        
+          <FunctionImport Name="InsertProjectAssignments">
+            <Parameter Name="fk_project" Mode="In" Type="Int32" />
+            <Parameter Name="fk_class" Mode="In" Type="Int32" />
+            <Parameter Name="fk_user_student" Mode="In" Type="Int32" />
+            <Parameter Name="fk_teacher" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertProjects">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="grade" Mode="In" Type="Double" />
+            <Parameter Name="grade_out_of" Mode="In" Type="Int32" />
+            <Parameter Name="grade_weight" Mode="In" Type="Int32" />
+            <Parameter Name="due_date" Mode="In" Type="DateTime" />
+            <Parameter Name="fk_class_id" Mode="In" Type="Int32" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+            <Parameter Name="last_modified" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="InsertSchools">
+            <Parameter Name="school_name" Mode="In" Type="String" />
+            <Parameter Name="country" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertTestAssignments">
+            <Parameter Name="fk_test" Mode="In" Type="Int32" />
+            <Parameter Name="fk_class" Mode="In" Type="Int32" />
+            <Parameter Name="fk_user_student" Mode="In" Type="Int32" />
+            <Parameter Name="fk_user_teacher" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertTests">
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="grade" Mode="In" Type="Double" />
+            <Parameter Name="grade_out_of" Mode="In" Type="Int32" />
+            <Parameter Name="grade_weight" Mode="In" Type="Int32" />
+            <Parameter Name="due_date" Mode="In" Type="DateTime" />
+            <Parameter Name="fk_class_id" Mode="In" Type="Int32" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="InsertUsers">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="fk_school" Mode="In" Type="Int32" />
+            <Parameter Name="fk_program" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="is_student" Mode="In" Type="Boolean" />
+            <Parameter Name="is_teacher" Mode="In" Type="Boolean" />
+            <Parameter Name="is_admin" Mode="In" Type="Boolean" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+            <Parameter Name="last_login_at" Mode="In" Type="Binary" />
+            <Parameter Name="email_confirmed" Mode="In" Type="Boolean" />
+            <Parameter Name="gpa" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SPMModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SPMModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="UpdateClassAssignments">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="fk_class" Mode="In" Type="Int32" />
+            <Parameter Name="fk_program" Mode="In" Type="Int32" />
+            <Parameter Name="fk_school" Mode="In" Type="Int32" />
+            <Parameter Name="fk_student" Mode="In" Type="Int32" />
+            <Parameter Name="fk_teacher" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateClasses">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="class_name" Mode="In" Type="String" />
+            <Parameter Name="class_code" Mode="In" Type="String" />
+            <Parameter Name="teacher_name" Mode="In" Type="String" />
+            <Parameter Name="credit_hours" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePrograms">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="fk_school" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="semesters" Mode="In" Type="Byte" />
+            <Parameter Name="course_code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateProjectAssignments">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="fk_project" Mode="In" Type="Int32" />
+            <Parameter Name="fk_class" Mode="In" Type="Int32" />
+            <Parameter Name="fk_user_student" Mode="In" Type="Int32" />
+            <Parameter Name="fk_teacher" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateProjects">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="grade" Mode="In" Type="Double" />
+            <Parameter Name="grade_out_of" Mode="In" Type="Int32" />
+            <Parameter Name="grade_weight" Mode="In" Type="Int32" />
+            <Parameter Name="due_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateSchools">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="school_name" Mode="In" Type="String" />
+            <Parameter Name="country" Mode="In" Type="String" />
+            <Parameter Name="city" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateTestAssignment">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="fk_test" Mode="In" Type="Int32" />
+            <Parameter Name="fk_class" Mode="In" Type="Int32" />
+            <Parameter Name="fk_user_student" Mode="In" Type="Int32" />
+            <Parameter Name="fk_user_teacher" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateTests">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="grade" Mode="In" Type="Double" />
+            <Parameter Name="grade_out_of" Mode="In" Type="Int32" />
+            <Parameter Name="grade_weight" Mode="In" Type="Int32" />
+            <Parameter Name="due_date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUsers">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="is_student" Mode="In" Type="Boolean" />
+            <Parameter Name="is_teacher" Mode="In" Type="Boolean" />
+            <Parameter Name="is_admin" Mode="In" Type="Boolean" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+            <Parameter Name="last_login_at" Mode="In" Type="Binary" />
+            <Parameter Name="email_confirmed" Mode="In" Type="Boolean" />
+            <Parameter Name="gpa" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="InsertPrograms">
+            <Parameter Name="fk_school" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="semesters" Mode="In" Type="Int32" />
+            <Parameter Name="course_code" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Programs" EntityType="SPMModel.Program" />
+          <AssociationSet Name="fk_class_program" Association="SPMModel.fk_class_program">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="Class_Assignements" EntitySet="Class_Assignements" />
+          </AssociationSet>
+          <AssociationSet Name="fk_programs_schools_programs" Association="SPMModel.fk_programs_schools_programs">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Program" EntitySet="Programs" />
+          </AssociationSet>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fk_school" Type="Int32" Nullable="false" />
+          <Property Name="programs_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="semesters" Type="Int32" />
+          <Property Name="course_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Class_Assignements" Relationship="SPMModel.fk_class_program" FromRole="Program" ToRole="Class_Assignements" />
+          <NavigationProperty Name="School" Relationship="SPMModel.fk_programs_schools_programs" FromRole="Program" ToRole="School" />
+        </EntityType>
+        <Association Name="fk_class_program">
+          <End Type="SPMModel.Program" Role="Program" Multiplicity="1" />
+          <End Type="SPMModel.Class_Assignements" Role="Class_Assignements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Class_Assignements">
+              <PropertyRef Name="fk_program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_programs_schools_programs">
+          <End Type="SPMModel.School" Role="School" Multiplicity="1" />
+          <End Type="SPMModel.Program" Role="Program" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Program">
+              <PropertyRef Name="fk_school" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SPMModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Class_Assignements">
+            <EntityTypeMapping TypeName="SPMModel.Class_Assignements">
+              <MappingFragment StoreEntitySet="Class_Assignements">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_program" ColumnName="fk_program" />
+                <ScalarProperty Name="fk_class" ColumnName="fk_class" />
+                <ScalarProperty Name="fk_school" ColumnName="fk_school" />
+                <ScalarProperty Name="fk_student" ColumnName="fk_student" />
+                <ScalarProperty Name="fk_teacher" ColumnName="fk_teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.Class_Assignements">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertClassAssignments">
+                  <ScalarProperty Name="fk_teacher" ParameterName="fk_teacher" />
+                  <ScalarProperty Name="fk_student" ParameterName="fk_student" />
+                  <ScalarProperty Name="fk_school" ParameterName="fk_school" />
+                  <ScalarProperty Name="fk_program" ParameterName="fk_program" />
+                  <ScalarProperty Name="fk_class" ParameterName="fk_class" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateClassAssignments">
+                  <ScalarProperty Name="fk_teacher" ParameterName="fk_teacher" Version="Current" />
+                  <ScalarProperty Name="fk_student" ParameterName="fk_student" Version="Current" />
+                  <ScalarProperty Name="fk_school" ParameterName="fk_school" Version="Current" />
+                  <ScalarProperty Name="fk_program" ParameterName="fk_program" Version="Current" />
+                  <ScalarProperty Name="fk_class" ParameterName="fk_class" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteClassAssignments">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="SPMModel.Class">
+              <MappingFragment StoreEntitySet="Classes">
+                <ScalarProperty Name="fk_School" ColumnName="fk_School" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="class_name" ColumnName="class_name" />
+                <ScalarProperty Name="class_code" ColumnName="class_code" />
+                <ScalarProperty Name="teacher_name" ColumnName="teacher_name" />
+                <ScalarProperty Name="credit_hours" ColumnName="credit_hours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.Class">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertClasses">
+                  <ScalarProperty Name="fk_School" ParameterName="fk_school_id" />
+                  <ScalarProperty Name="credit_hours" ParameterName="credit_hours" />
+                  <ScalarProperty Name="teacher_name" ParameterName="teacher_name" />
+                  <ScalarProperty Name="class_code" ParameterName="class_code" />
+                  <ScalarProperty Name="class_name" ParameterName="class_name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateClasses">
+                  <ScalarProperty Name="credit_hours" ParameterName="credit_hours" Version="Current" />
+                  <ScalarProperty Name="teacher_name" ParameterName="teacher_name" Version="Current" />
+                  <ScalarProperty Name="class_code" ParameterName="class_code" Version="Current" />
+                  <ScalarProperty Name="class_name" ParameterName="class_name" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteClasses">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Project_Assignments">
+            <EntityTypeMapping TypeName="SPMModel.Project_Assignments">
+              <MappingFragment StoreEntitySet="Project_Assignments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_class" ColumnName="fk_class" />
+                <ScalarProperty Name="fk_student" ColumnName="fk_student" />
+                <ScalarProperty Name="fk_project" ColumnName="fk_project" />
+                <ScalarProperty Name="fk_teacher" ColumnName="fk_teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.Project_Assignments">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertProjectAssignments">
+                  <ScalarProperty Name="fk_student" ParameterName="fk_user_student" />
+                  <ScalarProperty Name="fk_teacher" ParameterName="fk_teacher" />
+                  <ScalarProperty Name="fk_class" ParameterName="fk_class" />
+                  <ScalarProperty Name="fk_project" ParameterName="fk_project" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateProjectAssignments">
+                  <ScalarProperty Name="fk_student" ParameterName="fk_user_student" Version="Current" />
+                  <ScalarProperty Name="fk_teacher" ParameterName="fk_teacher" Version="Current" />
+                  <ScalarProperty Name="fk_class" ParameterName="fk_class" Version="Current" />
+                  <ScalarProperty Name="fk_project" ParameterName="fk_project" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteProjectsAssignment">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="SPMModel.Project">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="fk_class_id" ColumnName="fk_class_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="projects_name" ColumnName="projects_name" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="grade_out_of" ColumnName="grade_out_of" />
+                <ScalarProperty Name="grade_weight" ColumnName="grade_weight" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.Project">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertProjects">
+                  <ScalarProperty Name="fk_class_id" ParameterName="fk_class_id" />
+                  <ScalarProperty Name="projects_name" ParameterName="name" />
+                  <ScalarProperty Name="last_modified" ParameterName="last_modified" />
+                  <ScalarProperty Name="created_at" ParameterName="created_at" />
+                  <ScalarProperty Name="due_date" ParameterName="due_date" />
+                  <ScalarProperty Name="grade_weight" ParameterName="grade_weight" />
+                  <ScalarProperty Name="grade_out_of" ParameterName="grade_out_of" />
+                  <ScalarProperty Name="grade" ParameterName="grade" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateProjects">
+                  <ScalarProperty Name="projects_name" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="due_date" ParameterName="due_date" Version="Current" />
+                  <ScalarProperty Name="grade_weight" ParameterName="grade_weight" Version="Current" />
+                  <ScalarProperty Name="grade_out_of" ParameterName="grade_out_of" Version="Current" />
+                  <ScalarProperty Name="grade" ParameterName="grade" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteProjects">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="SPMModel.School">
+              <MappingFragment StoreEntitySet="Schools">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="school_name" ColumnName="school_name" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.School">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertSchools">
+                  <ScalarProperty Name="city" ParameterName="city" />
+                  <ScalarProperty Name="country" ParameterName="country" />
+                  <ScalarProperty Name="school_name" ParameterName="school_name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateSchools">
+                  <ScalarProperty Name="city" ParameterName="city" Version="Current" />
+                  <ScalarProperty Name="country" ParameterName="country" Version="Current" />
+                  <ScalarProperty Name="school_name" ParameterName="school_name" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteSchools">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SPM_Users">
+            <EntityTypeMapping TypeName="SPMModel.SPM_Users">
+              <MappingFragment StoreEntitySet="SPM_Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_schools" ColumnName="fk_schools" />
+                <ScalarProperty Name="fk_programs" ColumnName="fk_programs" />
+                <ScalarProperty Name="users_name" ColumnName="users_name" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="is_student" ColumnName="is_student" />
+                <ScalarProperty Name="is_teacher" ColumnName="is_teacher" />
+                <ScalarProperty Name="is_admin" ColumnName="is_admin" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="last_login_at" ColumnName="last_login_at" />
+                <ScalarProperty Name="email_confirmed" ColumnName="email_confirmed" />
+                <ScalarProperty Name="gpa" ColumnName="gpa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.SPM_Users">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertUsers">
+                  <ScalarProperty Name="fk_programs" ParameterName="fk_program" />
+                  <ScalarProperty Name="fk_schools" ParameterName="fk_school" />
+                  <ScalarProperty Name="pass" ParameterName="Password" />
+                  <ScalarProperty Name="users_name" ParameterName="UserName" />
+                  <ScalarProperty Name="gpa" ParameterName="gpa" />
+                  <ScalarProperty Name="email_confirmed" ParameterName="email_confirmed" />
+                  <ScalarProperty Name="last_login_at" ParameterName="last_login_at" />
+                  <ScalarProperty Name="created_at" ParameterName="created_at" />
+                  <ScalarProperty Name="is_admin" ParameterName="is_admin" />
+                  <ScalarProperty Name="is_teacher" ParameterName="is_teacher" />
+                  <ScalarProperty Name="is_student" ParameterName="is_student" />
+                  <ScalarProperty Name="email" ParameterName="email" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateUsers">
+                  <ScalarProperty Name="pass" ParameterName="Password" Version="Current" />
+                  <ScalarProperty Name="users_name" ParameterName="UserName" Version="Current" />
+                  <ScalarProperty Name="gpa" ParameterName="gpa" Version="Current" />
+                  <ScalarProperty Name="email_confirmed" ParameterName="email_confirmed" Version="Current" />
+                  <ScalarProperty Name="last_login_at" ParameterName="last_login_at" Version="Current" />
+                  <ScalarProperty Name="created_at" ParameterName="created_at" Version="Current" />
+                  <ScalarProperty Name="is_admin" ParameterName="is_admin" Version="Current" />
+                  <ScalarProperty Name="is_teacher" ParameterName="is_teacher" Version="Current" />
+                  <ScalarProperty Name="is_student" ParameterName="is_student" Version="Current" />
+                  <ScalarProperty Name="email" ParameterName="email" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteUsers">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SPMModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test_Assignments">
+            <EntityTypeMapping TypeName="SPMModel.Test_Assignments">
+              <MappingFragment StoreEntitySet="Test_Assignments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="fk_class" ColumnName="fk_class" />
+                <ScalarProperty Name="fk_test" ColumnName="fk_test" />
+                <ScalarProperty Name="fk_student" ColumnName="fk_student" />
+                <ScalarProperty Name="fk_user_teacher" ColumnName="fk_user_teacher" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.Test_Assignments">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertTestAssignments">
+                  <ScalarProperty Name="fk_student" ParameterName="fk_user_student" />
+                  <ScalarProperty Name="fk_user_teacher" ParameterName="fk_user_teacher" />
+                  <ScalarProperty Name="fk_class" ParameterName="fk_class" />
+                  <ScalarProperty Name="fk_test" ParameterName="fk_test" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateTestAssignment">
+                  <ScalarProperty Name="fk_student" ParameterName="fk_user_student" Version="Current" />
+                  <ScalarProperty Name="fk_user_teacher" ParameterName="fk_user_teacher" Version="Current" />
+                  <ScalarProperty Name="fk_class" ParameterName="fk_class" Version="Current" />
+                  <ScalarProperty Name="fk_test" ParameterName="fk_test" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteTestAssignment">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tests">
+            <EntityTypeMapping TypeName="SPMModel.Test">
+              <MappingFragment StoreEntitySet="Tests">
+                <ScalarProperty Name="fk_class_id" ColumnName="fk_class_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tests_name" ColumnName="tests_name" />
+                <ScalarProperty Name="grade" ColumnName="grade" />
+                <ScalarProperty Name="grade_out_of" ColumnName="grade_out_of" />
+                <ScalarProperty Name="grade_weight" ColumnName="grade_weight" />
+                <ScalarProperty Name="due_date" ColumnName="due_date" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="last_modified" ColumnName="last_modified" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.Test">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertTests">
+                  <ScalarProperty Name="fk_class_id" ParameterName="fk_class_id" />
+                  <ScalarProperty Name="tests_name" ParameterName="name" />
+                  <ScalarProperty Name="created_at" ParameterName="created_at" />
+                  <ScalarProperty Name="due_date" ParameterName="due_date" />
+                  <ScalarProperty Name="grade_weight" ParameterName="grade_weight" />
+                  <ScalarProperty Name="grade_out_of" ParameterName="grade_out_of" />
+                  <ScalarProperty Name="grade" ParameterName="grade" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.UpdateTests">
+                  <ScalarProperty Name="tests_name" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="due_date" ParameterName="due_date" Version="Current" />
+                  <ScalarProperty Name="grade_weight" ParameterName="grade_weight" Version="Current" />
+                  <ScalarProperty Name="grade_out_of" ParameterName="grade_out_of" Version="Current" />
+                  <ScalarProperty Name="grade" ParameterName="grade" Version="Current" />
+                  <ScalarProperty Name="id" ParameterName="id" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeleteTests">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="DeleteClassAssignments" FunctionName="SPMModel.Store.DeleteClassAssignments" />
+          <FunctionImportMapping FunctionImportName="DeleteClasses" FunctionName="SPMModel.Store.DeleteClasses" />
+          <FunctionImportMapping FunctionImportName="DeletePrograms" FunctionName="SPMModel.Store.DeletePrograms" />
+          <FunctionImportMapping FunctionImportName="DeleteProjects" FunctionName="SPMModel.Store.DeleteProjects" />
+          <FunctionImportMapping FunctionImportName="DeleteProjectsAssignment" FunctionName="SPMModel.Store.DeleteProjectsAssignment" />
+          <FunctionImportMapping FunctionImportName="DeleteSchools" FunctionName="SPMModel.Store.DeleteSchools" />
+          <FunctionImportMapping FunctionImportName="DeleteTestAssignment" FunctionName="SPMModel.Store.DeleteTestAssignment" />
+          <FunctionImportMapping FunctionImportName="DeleteTests" FunctionName="SPMModel.Store.DeleteTests" />
+          <FunctionImportMapping FunctionImportName="DeleteUsers" FunctionName="SPMModel.Store.DeleteUsers" />
+          <FunctionImportMapping FunctionImportName="InsertClassAssignments" FunctionName="SPMModel.Store.InsertClassAssignments" />
+          <FunctionImportMapping FunctionImportName="InsertClasses" FunctionName="SPMModel.Store.InsertClasses" />
+         
+          <FunctionImportMapping FunctionImportName="InsertProjectAssignments" FunctionName="SPMModel.Store.InsertProjectAssignments" />
+          <FunctionImportMapping FunctionImportName="InsertProjects" FunctionName="SPMModel.Store.InsertProjects" />
+          <FunctionImportMapping FunctionImportName="InsertSchools" FunctionName="SPMModel.Store.InsertSchools" />
+          <FunctionImportMapping FunctionImportName="InsertTestAssignments" FunctionName="SPMModel.Store.InsertTestAssignments" />
+          <FunctionImportMapping FunctionImportName="InsertTests" FunctionName="SPMModel.Store.InsertTests" />
+          <FunctionImportMapping FunctionImportName="InsertUsers" FunctionName="SPMModel.Store.InsertUsers" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SPMModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SPMModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SPMModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SPMModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SPMModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SPMModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SPMModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SPMModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SPMModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="UpdateClassAssignments" FunctionName="SPMModel.Store.UpdateClassAssignments" />
+          <FunctionImportMapping FunctionImportName="UpdateClasses" FunctionName="SPMModel.Store.UpdateClasses" />
+          <FunctionImportMapping FunctionImportName="UpdatePrograms" FunctionName="SPMModel.Store.UpdatePrograms" />
+          <FunctionImportMapping FunctionImportName="UpdateProjectAssignments" FunctionName="SPMModel.Store.UpdateProjectAssignments" />
+          <FunctionImportMapping FunctionImportName="UpdateProjects" FunctionName="SPMModel.Store.UpdateProjects" />
+          <FunctionImportMapping FunctionImportName="UpdateSchools" FunctionName="SPMModel.Store.UpdateSchools" />
+          <FunctionImportMapping FunctionImportName="UpdateTestAssignment" FunctionName="SPMModel.Store.UpdateTestAssignment" />
+          <FunctionImportMapping FunctionImportName="UpdateTests" FunctionName="SPMModel.Store.UpdateTests" />
+          <FunctionImportMapping FunctionImportName="UpdateUsers" FunctionName="SPMModel.Store.UpdateUsers" />
+          <FunctionImportMapping FunctionImportName="InsertPrograms" FunctionName="SPMModel.Store.InsertPrograms" />
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="SPMModel.Program">
+              <MappingFragment StoreEntitySet="Programs">
+                <ScalarProperty Name="course_code" ColumnName="course_code" />
+                <ScalarProperty Name="semesters" ColumnName="semesters" />
+                <ScalarProperty Name="programs_name" ColumnName="programs_name" />
+                <ScalarProperty Name="fk_school" ColumnName="fk_school" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMModel.Program">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMModel.Store.InsertPrograms">
+                  <ScalarProperty Name="programs_name" ParameterName="name" />
+                  <ScalarProperty Name="course_code" ParameterName="course_code" />
+                  <ScalarProperty Name="semesters" ParameterName="semesters" />
+                  <ScalarProperty Name="fk_school" ParameterName="fk_school" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="SPMModel.Store.InsertPrograms">
+                  <ScalarProperty Name="programs_name" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="course_code" ParameterName="course_code" Version="Current" />
+                  <ScalarProperty Name="semesters" ParameterName="semesters" Version="Current" />
+                  <ScalarProperty Name="fk_school" ParameterName="fk_school" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SPMModel.Store.DeletePrograms">
+                  <ScalarProperty Name="id" ParameterName="id" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

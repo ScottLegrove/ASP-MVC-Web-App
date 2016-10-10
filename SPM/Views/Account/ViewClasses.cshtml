@@ -1,0 +1,161 @@
+﻿@model SPM.Models.ViewClassesModel
+@using SPM.Entities;
+@using System.Collections.Generic;
+
+@{
+    ViewBag.Title = "Classes";
+    Layout = "~/Views/Shared/_Account.cshtml";
+}
+<div class="row">
+    <h2>@ViewData["userName"]&#39;s Classes</h2>
+
+    @using (Html.BeginForm())
+    {
+        <div class="row form-inline" style="padding-top: 50px;">
+            @Html.LabelFor(m => m.SelectClass, new { @class = "col-md-2 control-label", @style = "font-size: 13pt;"})
+            <div class="col-md-5">
+                @{
+                    List<SelectListItem> listItems = ViewData["selectClasses"] as List<SelectListItem>;
+                }
+
+                @Html.DropDownListFor(m => m.SelectedValue, listItems, "-- Select Class --", new { onchange = "this.form.submit();" })
+            </div>
+        </div>
+      }
+</div>
+<div class="row" style="padding-top: 50px;">
+    <h4 class="text-primary" style="font-size:20pt;">Projects</h4>
+
+    @{
+        List<Project> projects = ViewData["projectList"] as List<Project>;
+    }
+
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Due Date</th>
+            <th>Time Remaining</th>
+            <th>Grade</th>
+            <th>Grade Weight</th>
+        </tr>
+        @{
+            if (projects != null)
+            {
+                foreach (var project in projects)
+                {
+                    if (project != null)
+                    {
+                        <tr>
+                            <td>@project.projects_name</td>
+                            <td>@project.due_date</td>
+                            @{
+                                if (@project.due_date.Subtract(DateTime.Now).TotalDays > 1)
+                                {
+                                    <td>@Math.Round(project.due_date.Subtract(DateTime.Now).TotalDays, 0) days</td>
+                                }
+                                else if (@project.due_date.Subtract(DateTime.Now).TotalHours > 1)
+                                {
+                                    <td>@Math.Round(project.due_date.Subtract(DateTime.Now).TotalHours, 0) hours</td>
+                                }
+                                else if (@project.due_date.Subtract(DateTime.Now).TotalMinutes > 1)
+                                {
+                                    <td>@Math.Round(project.due_date.Subtract(DateTime.Now).TotalMinutes, 0) minutes</td>
+                                }
+                                else
+                                {
+                                    <td>Past Due</td>
+                                }
+                            }
+
+                            @{ 
+                                if(project.grade == null)
+                                {
+                                    project.grade = 0;
+                                }
+
+                                if(project.grade_out_of == 0)
+                                {
+                                    project.grade_out_of = 100;
+                                }
+                            }
+                            <td>@project.grade / @project.grade_out_of</td>
+                            <td>@project.grade_weight</td>  
+                            <td>@Html.ActionLink("Add Grade", "EditProject", new { id = project.id })</td> 
+                            <td>@Html.ActionLink("Delete Project", "DeleteProject", new { id = project.id })</td>                         
+                        </tr>
+                    }
+                }
+            }
+        }
+    </table>
+
+    <h4 class="text-primary" style="font-size:20pt;">Tests</h4>
+    @{
+        List<Test> tests = ViewData["testList"] as List<Test>;
+    }
+
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Due date</th>
+            <th>Time remaining</th>
+            <th>Grade</th>
+            <th>Grade Weight</th>
+        </tr>
+        @{
+            if (tests != null)
+            {
+                foreach (var test in tests)
+                {
+                    if (test != null)
+                    {
+                        <tr>
+                            <td>@test.tests_name</td>
+                            <td>@test.due_date</td>
+                            @{
+                                if (@test.due_date.Subtract(DateTime.Now).TotalDays > 1)
+                                {
+                                    <td>@Math.Round(test.due_date.Subtract(DateTime.Now).TotalDays, 0) days</td>
+                                }
+                                else if (@test.due_date.Subtract(DateTime.Now).TotalHours > 1)
+                                {
+                                    <td>@Math.Round(test.due_date.Subtract(DateTime.Now).TotalHours, 0) hours</td>
+                                }
+                                else if (@test.due_date.Subtract(DateTime.Now).TotalMinutes > 1)
+                                {
+                                    <td>@Math.Round(test.due_date.Subtract(DateTime.Now).TotalMinutes, 0) minutes</td>
+                                }
+                                else
+                                {
+                                    <td>Past Due</td>
+                                }
+                            }
+
+                            @{
+                                if (test.grade == null)
+                                {
+                                    test.grade = 0;
+                                }
+
+                                if (test.grade_out_of == 0)
+                                {
+                                    test.grade_out_of = 100;
+                                }
+                            }
+                            <td>@test.grade / @test.grade_out_of</td>
+                            <td>@test.grade_weight</td>
+                            <td>@Html.ActionLink("Add Grade", "EditTest", new { id = test.id })</td>
+                            <td>@Html.ActionLink("Delete Test", "DeleteTest", new { id = test.id })</td> 
+                        </tr>
+                    }
+                }
+            }
+        }
+    </table>  
+    <div  style="padding-top: 60px;">
+        <span class="text-success lead"><bold><em>Class Grade: @ViewData["classGrade"]</em></bold></span> 
+    </div>
+                                            
+</div>
+
+

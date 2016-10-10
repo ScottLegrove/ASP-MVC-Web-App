@@ -1,0 +1,107 @@
+﻿@model SPM.Models.RegisterViewModel
+@using System.Collections.Generic;
+@using SPM.Entities
+
+
+@{ 
+    ViewBag.Title = "Register";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    <div class="container">
+        <div class="col-lg-offset-2">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @{
+                    string emailError = "";
+                    if (ViewData["userEmailError"] != null)
+                    {
+                        emailError = ViewData["userEmailError"].ToString();
+                    }
+                }
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <span style="color: red;">@emailError</span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @{
+                    string userNameError = "";
+                    if (ViewData["userNameError"] != null)
+                    {
+                        userNameError = ViewData["userNameError"].ToString();
+                    }
+                }
+                @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <span style="color: red;">@userNameError</span>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("School", new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    <div>
+                        @{
+                            List<SelectListItem> listItems = ViewData["schoolList"] as List<SelectListItem>;
+                        }
+
+                        @Html.DropDownListFor(m => m.SelectedValue, listItems, "-- Select School --", new { onchange = "this.form.submit();" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @{
+                    if (ViewData["programList"] != null)
+                    {
+                        @Html.Label("Program", new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+
+                            @{
+                                List<SelectListItem> programItems = ViewData["programList"] as List<SelectListItem>;
+                            }
+
+                            @Html.DropDownListFor(m => m.ProgramSelectedValue, programItems, "-- Select Program --")
+                            @Html.ValidationMessageFor(m => m.SelectProgram, "", new { @class = "text-danger" })
+                        </div>
+                                }
+                }
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <div>                
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Register" />
+                    <div style="padding-top: 20px;">
+                        @Html.ActionLink("Are you an admin?", "RegisterAdmin")
+                    </div>  
+                </div>                                 
+            </div>           
+        </div>
+    </div>
+                            }
+
+
+@section Scripts {
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/jquery")
+}

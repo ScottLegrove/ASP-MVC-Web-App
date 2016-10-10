@@ -1,0 +1,108 @@
+﻿@using SPM.Entities;
+@using System.Collections.Generic;
+
+
+@{
+    ViewBag.Title = "Dashoboard";   
+        Layout = "~/Views/Shared/_Account.cshtml";    
+}
+<div class="row">
+    <h2>Dashboard</h2>
+    <h3>@ViewData["schoolName"]</h3>
+</div>
+
+<div style="padding-top: 75px;">
+    <h4>Upcoming Projects and Tests</h4>
+</div>
+
+<div style="padding-top: 25px;">
+    <h4>Projects</h4>
+
+    @{
+        List<Project> projects = ViewData["upcomingProjects"] as List<Project>;         
+    }
+
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Due Date</th>
+            <th>Time Remaining</th>
+        </tr>
+        @{
+            foreach (var project in projects)
+            {
+                if (project != null)
+                {
+                    <tr>
+                        <td>@project.projects_name</td>
+                        <td>@project.due_date</td>
+                        @{
+                            if (@project.due_date.Subtract(DateTime.Now).TotalDays > 1)
+                            {
+                                <td>@Math.Round(project.due_date.Subtract(DateTime.Now).TotalDays, 0) days</td>
+                            }
+                            else if (@project.due_date.Subtract(DateTime.Now).TotalHours > 1)
+                            {
+                                <td>@Math.Round(project.due_date.Subtract(DateTime.Now).TotalHours, 0) hours</td>
+                            }
+                            else if (@project.due_date.Subtract(DateTime.Now).TotalMinutes > 1)
+                            {
+                                <td>@Math.Round(project.due_date.Subtract(DateTime.Now).TotalMinutes, 0) minutes</td>
+                            }
+                            else
+                            {
+                                <td>Past Due</td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+         }
+    </table>      
+
+    <h4>Tests</h4>
+
+    @{
+        List<Test> tests = ViewData["upcomingTests"] as List<Test>;
+    }
+
+    <table class="table table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Due date</th>
+            <th>Time remaining</th>
+        </tr>
+        @{
+            foreach (var test in tests)
+            {
+                if (test != null)
+                {
+                <tr>
+                    <td>@test.tests_name</td>
+                    <td>@test.due_date</td>
+                    @{
+                        if (@test.due_date.Subtract(DateTime.Now).TotalDays > 1)
+                        {
+                            <td>@Math.Round(test.due_date.Subtract(DateTime.Now).TotalDays, 0) days</td>
+                        }
+                        else if (@test.due_date.Subtract(DateTime.Now).TotalHours > 1)
+                        {
+                            <td>@Math.Round(test.due_date.Subtract(DateTime.Now).TotalHours, 0) hours</td>
+                        }
+                        else if (@test.due_date.Subtract(DateTime.Now).TotalMinutes > 1)
+                        {
+                            <td>@Math.Round(test.due_date.Subtract(DateTime.Now).TotalMinutes, 0) minutes</td>
+                        }
+                        else
+                        {
+                            <td>Past Due</td>
+                        }
+                    }                    
+                </tr>
+                }
+            }
+        }
+    </table>         
+</div>
+
+
